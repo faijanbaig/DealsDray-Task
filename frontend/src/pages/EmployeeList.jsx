@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Employee from "../components/Employee";
 import axios from "axios";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 
 const EmployeeList = () => {
   const [count, setCount] = useState(0);
@@ -31,7 +31,6 @@ const EmployeeList = () => {
     }
 };
 
-// useEffect to fetch employees on component mount
 useEffect(() => {
     fetchEmployees();
 }, [fetchEmployees]);
@@ -61,21 +60,17 @@ useEffect(() => {
     if (!confirmDelete) return;
 
     try {
-      // Make the delete request
       await axios.delete(`${apiUrl}/employees/${employeeId}`, {
         withCredentials: true,
       });
 
-      // Filter out the deleted employee from the state
       const updatedEmployees = employees.filter(
         (emp) => emp._id !== employeeId
       );
       setEmployees(updatedEmployees);
 
-      // Show a success message
       alert("Employee deleted successfully.");
     } catch (error) {
-      // Log the error and show an alert
       console.error("Error deleting employee:", error);
       alert("Failed to delete the employee. Please try again.");
     }
@@ -202,7 +197,6 @@ useEffect(() => {
             </table>
           </div>
 
-          {/* Pagination */}
           <div className="flex justify-center mt-4">
             {Array.from(
               {
